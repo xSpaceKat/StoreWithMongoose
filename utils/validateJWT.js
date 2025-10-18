@@ -1,0 +1,22 @@
+import jwt from 'jsonwebtoken';
+import { AppError } from '../appError.js';
+
+const validateJWT = (req, res, next) => {
+    // obtener el token desde la petición (headers)
+    const token = req.header('Authorization');
+
+    if (!token) {
+        next(new AppError('No se proporcionó un token', 400));
+    }
+
+    try {
+        // verificar el token
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        req.user = decoded;
+        next();
+    } catch (error) {
+        next(new AppError('El token no es válido', 500));
+    }
+};
+
+export default validateJWT;
