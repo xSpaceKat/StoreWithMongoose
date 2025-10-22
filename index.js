@@ -5,6 +5,7 @@ import corsMiddleware from "./utils/validateCORS.js";
 import jwt from "jsonwebtoken";
 import { conectar } from "./config/db.js";
 import productoRouter from "./routers/productoRouter.js";
+import ventaRouter from "./routers/ventaRouter.js";
 import validateJWT from "./utils/validateJWT.js";
 
 conectar();
